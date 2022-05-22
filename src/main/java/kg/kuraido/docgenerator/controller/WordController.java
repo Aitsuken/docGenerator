@@ -23,6 +23,8 @@ public class WordController {
     @Autowired
     FieldsRepository repository;
 
+    //@GetMapping(value = "/output")
+
     @GetMapping(value = "/word", produces = "application/vnd.openxmlformats-" +
     "officedocument.wordprocessingml.document")
         public ResponseEntity<InputStreamResource> word()

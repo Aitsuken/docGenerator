@@ -11,8 +11,11 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class DocGeneratorApplication {
 
-    @Autowired
-    FieldsRepository repository;
+    final FieldsRepository repository;
+
+    public DocGeneratorApplication(FieldsRepository repository) {
+        this.repository = repository;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(DocGeneratorApplication.class, args);
@@ -22,7 +25,7 @@ public class DocGeneratorApplication {
     @Bean
     public CommandLineRunner executions(FieldsRepository repository){
         return (args) -> {
-       /* repository.save(new Fields("Python Game", "pooploser@gmail.com", "Bakyt Tashitov"));
+      /*  repository.save(new Fields("Python Game", "pooploser@gmail.com", "Bakyt Tashitov"));
             repository.save(new Fields("Java AI chess", "murat.eshimov@mail.ru", "Murat Eshimov"));*/
         };
     }

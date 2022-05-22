@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>DocGen</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+<div class="col-md-8 mx-auto">
+    <h1>Welcome to docGenerator V. 0.1 !</h1>
+    <h3>Submit your file down bellow!</h3>
+    <p th:text="${message}" th:if="${message ne null}" class="alert alert-main" ></p>
+    <form method="post" th:action="@{/upload}" enctype="multipart/form-data">
+        <div class="form">
+            <input type="file" name="file" class="form-control-file">
+        </div>
+        <button type="submit" class="btn btn-main">Upload file</button>
+    </form>
+</div>
+
+<img class="iau-logo" th:src="@{/images/genesis.png}"/>
+
+</body>
+</html>
