@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.apache.xmlbeans.XmlBeans.getTitle;
 
@@ -39,14 +40,30 @@ public class WordHelper {
 
     @Autowired
     FieldsRepository repository;
-    //Fields fields = repository.findById(count);
+    //Fields fields = repository.findById();
     WordHelper(){
     }
-    public static ByteArrayInputStream generateWord(Fields fields)
+    public static ByteArrayInputStream generateWord(Fields fields, long id)
             throws FileNotFoundException, IOException, InvalidFormatException {
 
         try(XWPFDocument sourceDoc = new XWPFDocument(new FileInputStream("./src/main/resources/uploads/test.docx"))){
             XWPFDocument destDoc = sourceDoc;
+            for (XWPFParagraph p : destDoc.getParagraphs()) {
+                List<XWPFRun> runs = p.getRuns();
+                if (runs != null) {
+                    for (XWPFRun r : runs) {
+                        String text = r.getText(0);
+                        if (text != null && text.contains("needle")) {
+                            text = text.replace("needle", "haystack");
+                            r.setText(text, 0);
+                        }
+                    }
+                }
+            }
+            ByteArrayOutputStream b = new ByteArrayOutputStream();
+            destDoc.write(b);
+
+            return new ByteArrayInputStream(b.toByteArray());
         }
 
 

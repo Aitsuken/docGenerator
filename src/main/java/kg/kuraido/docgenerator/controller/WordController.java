@@ -19,7 +19,7 @@ import java.io.IOException;
 @RestController
     @RequestMapping("api")
 public class WordController {
-    static int count = 1;
+    static int id = 1;
     @Autowired
     FieldsRepository repository;
 
@@ -29,12 +29,11 @@ public class WordController {
     "officedocument.wordprocessingml.document")
         public ResponseEntity<InputStreamResource> word()
     throws IOException, InvalidFormatException {
-        Fields fields = repository.findById(count);
-        ByteArrayInputStream bis = WordHelper.generateWord(fields);
+        Fields fields = repository.findById(id);
+        ByteArrayInputStream bis = WordHelper.generateWord(fields, id);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "inline; filename=text.docx");
-        count++;
-        System.out.println(count);
+        System.out.println(id);
         return ResponseEntity.ok().headers(headers).body(new InputStreamResource(bis));
 
 

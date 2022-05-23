@@ -21,7 +21,13 @@
         </div>
         <button type="submit" class="btn btn-main">Upload file</button>
     </form>
+    <form th:action="@{/api/word}" th:object="${id}" method="post">
+        <input type="text" id="datePlanted" name="datePlanted" />
+        <button type="submit">Get Doc</button>
+    </form>
 </div>
+
+
 
 <img class="iau-logo" th:src="@{/images/genesis.png}"/>
 
