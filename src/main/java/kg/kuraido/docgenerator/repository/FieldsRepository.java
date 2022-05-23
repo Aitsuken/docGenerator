@@ -8,4 +8,5 @@ import java.util.List;
 public interface FieldsRepository extends JpaRepository<Fields, Long> {
     Fields findById(long id);
     List<Fields> findAll();
+    //long countFieldsById();
 }
