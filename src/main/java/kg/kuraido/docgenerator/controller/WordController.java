@@ -45,9 +45,10 @@ public class WordController {
         public ResponseEntity<InputStreamResource> word(Model model)
     throws IOException, InvalidFormatException {
         model.addAttribute("field", repository.findAll());
-            Fields fields = repository.findById(id++);
+            //Fields fields = repository.findById(id++);
             //System.out.println(repository.countFieldsById());
-            ByteArrayInputStream bis = WordHelper.generateWord(fields);
+            ByteArrayInputStream bis =
+                    WordHelper.generateWord(repository, reposCrud);
 
             //ZipOutputStream zos =    new ZipOutputStream(bis);
             HttpHeaders headers = new HttpHeaders();
